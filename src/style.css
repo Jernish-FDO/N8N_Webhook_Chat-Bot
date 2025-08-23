@@ -43,7 +43,7 @@ body {
   padding: 15px;
   margin-bottom: 15px;
   backdrop-filter: blur(10px);
-  max-height: 1600px;
+  max-height: 1200px;
   overflow-y: auto;
 }
 
