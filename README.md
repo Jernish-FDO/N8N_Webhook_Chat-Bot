@@ -285,4 +285,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - N8N community for workflow automation inspiration
 - Various chat platform APIs and documentation
 - Open source contributors and examples
+<<<<<<< HEAD
 ***
+=======
+***
+>>>>>>> f4147389a5dca9372c76f32b7547083da3b55ee7
