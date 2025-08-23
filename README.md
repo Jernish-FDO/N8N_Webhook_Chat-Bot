@@ -1,9 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
-# https://github.com/Jernish-FDO/N8N_Webhook_Chat-Bot.git this is my project i need readme.md files
-
-I'll create a comprehensive README.md file for your N8N Webhook Chat-Bot project. Based on the repository URL and your background in IoT automation and electronics engineering, I'll structure this README to be professional and informative.
-
 # N8N Webhook Chat-Bot
 
 A versatile chat-bot implementation using N8N webhooks that enables seamless integration between messaging platforms and automated workflows. This project demonstrates how to create intelligent conversational interfaces powered by N8N's workflow automation capabilities.
@@ -286,52 +280,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - GitHub: [@Jernish-FDO](https://github.com/Jernish-FDO)
 - Specialization: IoT Automation, Workflow Automation
 
-
 ## 🙏 Acknowledgments
 
-- N8N community for workflow automation inspiration[^1_1][^1_2][^1_3]
-- Various chat platform APIs and documentation[^1_4][^1_5]
-- Open source contributors and examples[^1_6][^1_7]
-
+- N8N community for workflow automation inspiration
+- Various chat platform APIs and documentation
+- Open source contributors and examples
 ***
-
-**Need help?** Feel free to open an issue or reach out for support with your IoT automation projects!
-<span style="display:none">[^1_10][^1_11][^1_12][^1_13][^1_14][^1_15][^1_16][^1_17][^1_18][^1_8][^1_9]</span>
-
-<div style="text-align: center">⁂</div>
-
-[^1_1]: https://n8n.io/integrations/webhook/and/github/
-
-[^1_2]: https://github.com/syshen/n8n-nodes-linewebhook
-
-[^1_3]: https://github.com/symbiosika/n8n-embedded-chat-interface
-
-[^1_4]: https://github.com/topics/n8n-webhook
-
-[^1_5]: https://www.npmjs.com/package/@n8n/chat
-
-[^1_6]: https://github.com/juansebsol/n8n-chatbot-template
-
-[^1_7]: https://github.com/chat-data-llc/n8n-nodes-chat-data
-
-[^1_8]: https://github.com/Jernish-FDO/N8N_Webhook_Chat-Bot.git
-
-[^1_9]: https://n8n.io/integrations/webhook/and/chatbase/
-
-[^1_10]: https://n8n.io/integrations/webhook/and/chatling/
-
-[^1_11]: https://github.com/enescingoz/awesome-n8n-templates
-
-[^1_12]: https://www.youtube.com/watch?v=lK3veuZAg0c
-
-[^1_13]: https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.webhook/
-
-[^1_14]: https://n8n.io/integrations/webhook/
-
-[^1_15]: https://www.youtube.com/watch?v=DU2hwUsMBBM
-
-[^1_16]: https://www.pondhouse-data.com/blog/integrating-n8n-with-open-webui
-
-[^1_17]: https://n8n.io/workflows/3456-automated-discord-chatbot-for-chat-interaction-in-channel-using-gemini-20-flash/
-
-[^1_18]: https://www.youtube.com/watch?v=mLTqabG0l7c
