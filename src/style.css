@@ -8,14 +8,14 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
   color: #e6fffe;
-  min-height: 100vh;
+  max-height: 100vh;
 }
 
 .container {
   max-width: 800px;
   margin: 0 auto;
   padding: 18px;
-  max-height: 96vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
