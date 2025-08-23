@@ -1,0 +1,186 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chatwebhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        280,
+        -180
+      ],
+      "id": "8c18b51c-2a03-4675-a6ca-ecd1c3871066",
+      "name": "Webhook",
+      "webhookId": "9abe910f-6acc-4bc9-a970-7de47a3a23e5"
+    },
+    {
+      "parameters": {
+        "functionCode": "const query = $json[\"body\"]?.query?.toLowerCase() || \"\";\nlet context = \"\";\n\nif (query.includes(\"ai\")) {\n  context = \"AI stands for Artificial Intelligence, which involves machines simulating human intelligence.\";\n} else if (query.includes(\"n8n\")) {\n  context = \"n8n is a workflow automation tool enabling integration of multiple APIs and services easily.\";\n}\n\nreturn [{ json: { sessionId: $json[\"body\"].sessionId, query: $json[\"body\"].query, context } }];"
+      },
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        480,
+        -180
+      ],
+      "id": "f538388f-2f77-4a89-8e47-a594e2d3e8f8",
+      "name": "Context Injection"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId ? $json.sessionId : 'anonymous' }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        740,
+        20
+      ],
+      "id": "a6458c2f-8c1f-4050-aa1d-bd6ecc8d7bb9",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "options": {
+          "systemMessage": "You are Jarvis, a friendly personal AI assistant who learns continuously from each interaction, responds promptly, and always presents information and code in a clean, well-formatted style.\n\nBehavior guidelines:\n1. Greet users warmly and maintain an approachable tone.  \n2. Adapt over time: learn user preferences (e.g., preferred code style, output formatting) and apply them in future responses.  \n3. Handle any question or task independently without relying on external tools; draw on your knowledge and reasoning abilities.  \n4. Always avoid fabricating information—if unsure, say:  \n   I’m not certain; could you clarify or provide more details?  \n5. Structure responses clearly:  \n   - Use headings (e.g., “## Solution Overview”)  \n   - Present steps in ordered lists for processes  \n   - Wrap code in fenced blocks with language identifiers  \n   - Label command outputs or results  \n6. Provide neat, executable code examples when requested, and explain each part.  \n7. End each response by asking if the user needs further assistance, reinforcing Jarvis’s supportive role.\n\nContext:\n{{$json.context || \"No additional context provided.\"}}\n\nConversation History:\n{{$node[\"Simple Memory\"].json.history || \"No previous messages.\"}}\n\nUser’s Question:\n{{$json.query}}\n\nRespond with a complete, polished answer.  \n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        640,
+        -180
+      ],
+      "id": "b36a8a4f-27cb-44cb-b9b4-d7ad3732631a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        620,
+        20
+      ],
+      "id": "be1cc460-a926-479f-aac4-8f89927050c8",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "OOtHlyLpn54gq1Z9",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { answer: $json[\"output\"] || \"Sorry, I couldn't generate a response at this time.\" } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        -180
+      ],
+      "id": "19375d7a-23c7-4636-a2f4-9d713cea6272",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "sseEndpoint": "https://n8n-ifzdsbou.us-west-1.clawcloudrun.com/mcp/c8903040-59fc-476b-93a0-40727a9f9308/sse"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        880,
+        20
+      ],
+      "id": "a78fe004-5af1-4fed-b91d-19210794c02e",
+      "name": "MCP Client"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Context Injection",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Context Injection": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d7f7a9952710ba29b1e34bce50ec33797b79d7794b2b50bb7debf25954857b9e"
+  }
+}
