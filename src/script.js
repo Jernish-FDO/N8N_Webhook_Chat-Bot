@@ -3,7 +3,7 @@ const sessionId = "session_" + Math.random().toString(36).substr(2, 9);
 
 // Your N8N webhook URL
 const webhookUrl =
-  "https://n8n-zwnkwasy.ap-southeast-1.clawcloudrun.com/webhook/chatwebhook";
+  "https://n8n-zwnkwasy.ap-southeast-1.clawcloudrun.com/webhook/webhook";
 
 function addCopyButtonsToCodeBlocks() {
   const codeBlocks = document.querySelectorAll("pre:not(.copy-added)");
