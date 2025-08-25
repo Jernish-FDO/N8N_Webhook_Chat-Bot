@@ -1,5 +1,5 @@
 // Generate unique session ID
-const sessionId = "session_" + 10 //Math.random().toString(36).substr(2, 9);
+const sessionId = "session_" + Math.random().toString(36).substr(2, 9);
 
 // Your N8N webhook URL
 const webhookUrl =
